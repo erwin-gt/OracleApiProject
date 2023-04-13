@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oracle.WebApi", "Oracle.WebApi\Oracle.WebApi.csproj", "{BE299379-5A69-4F66-A12E-EB683348E4E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oracle.DataAccess", "Oracle.DataAccess\Oracle.DataAccess.csproj", "{0394ACCC-C39E-4184-92F3-B87CDDF06CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.Services", "Oracle.Services\Oracle.Services.csproj", "{24F79C27-AD7E-4664-93B8-8F0830D14308}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.DTO", "Oracle.DTO\Oracle.DTO.csproj", "{114693A7-D663-4052-91CB-A7DB701FCF8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE299379-5A69-4F66-A12E-EB683348E4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE299379-5A69-4F66-A12E-EB683348E4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE299379-5A69-4F66-A12E-EB683348E4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE299379-5A69-4F66-A12E-EB683348E4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0394ACCC-C39E-4184-92F3-B87CDDF06CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0394ACCC-C39E-4184-92F3-B87CDDF06CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0394ACCC-C39E-4184-92F3-B87CDDF06CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0394ACCC-C39E-4184-92F3-B87CDDF06CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F79C27-AD7E-4664-93B8-8F0830D14308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F79C27-AD7E-4664-93B8-8F0830D14308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F79C27-AD7E-4664-93B8-8F0830D14308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F79C27-AD7E-4664-93B8-8F0830D14308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{114693A7-D663-4052-91CB-A7DB701FCF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114693A7-D663-4052-91CB-A7DB701FCF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114693A7-D663-4052-91CB-A7DB701FCF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114693A7-D663-4052-91CB-A7DB701FCF8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E3842EE-37CD-4995-8F29-47CCA508F1B6}
+	EndGlobalSection
+EndGlobal
