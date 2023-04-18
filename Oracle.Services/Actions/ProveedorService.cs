@@ -64,7 +64,7 @@ namespace Oracle.Services.Actions
             if (lista != null)
                 resp.Objeto = lista;
             else
-                resp.AgregarInternalServerError("Se encontro un Erro");
+                resp.AgregarInternalServerError("Se encontro un Error");
 
             return resp;
         }
