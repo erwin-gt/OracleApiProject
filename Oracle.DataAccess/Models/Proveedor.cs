@@ -5,7 +5,7 @@ namespace Oracle.DataAccess.Models;
 
 public partial class Proveedor
 {
-    public decimal Idproveedor { get; set; }
+    public int Idproveedor { get; set; }
 
     public string Nombreempresa { get; set; } = null!;
 
