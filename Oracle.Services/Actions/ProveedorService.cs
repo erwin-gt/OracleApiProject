@@ -22,9 +22,9 @@ namespace Oracle.Services.Actions
                 resp.AgregarBadRequest("ID recibido no esta registrado");
             else
                 prov.Nombreempresa = pr.Nombreempresa;
-            prov.Telefono = pr.Telefono;
-            prov.Contacto = pr.Contacto;
-            prov.Email = pr.Email;
+                prov.Telefono = pr.Telefono;
+                prov.Contacto = pr.Contacto;
+                prov.Email = pr.Email;
             try
             {
                 _context.Proveedors.Update(prov);
@@ -40,19 +40,61 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public Task<RespuestaService<Proveedor>> BuscarPorId(int id)
+        public async Task<RespuestaService<Proveedor>> BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            var resp = new RespuestaService<Proveedor>();
+            var prov = await _context.Proveedors.FirstOrDefaultAsync(x => x.Idproveedor == id);
+
+            // valida la existencia del ID del usuario
+            if (prov == null)
+                resp.AgregarBadRequest("ID ingresado no esta registrado");
+            else
+                resp.Objeto = prov;
+            return resp;
         }
 
-        public Task<RespuestaService<bool>> Eliminar(int id)
+        public async Task<RespuestaService<bool>> Eliminar(int id)
         {
-            throw new NotImplementedException();
+            var resp = new RespuestaService<bool>();
+            var prov = await _context.Proveedors.FirstOrDefaultAsync(x => x.Idproveedor == id);
+
+            if (prov == null)
+                resp.AgregarBadRequest("ID ingresado no esta registrado");
+            else
+            {
+                try
+                {
+                    _context.Proveedors.Remove(prov);
+                    await _context.SaveChangesAsync();
+                    resp.Exito = true;
+                }
+                catch (DbUpdateException ex)
+                {
+                    resp.AgregarInternalServerError(ex.Message);
+                }
+            }
+
+            return resp;
         }
 
-        public Task<RespuestaService<Proveedor>> Guardar(Proveedor pr)
+        public async Task<RespuestaService<Proveedor>> Guardar(Proveedor pr)
         {
-            throw new NotImplementedException();
+            var resp = new RespuestaService<Proveedor>();
+
+            try
+            {
+                await _context.Proveedors.AddAsync(pr);
+                await _context.SaveChangesAsync();
+                pr.Idproveedor = await _context.Proveedors.MaxAsync(prv => prv.Idproveedor);
+
+                resp.Objeto = pr;
+            }
+            catch (DbUpdateException ex)
+            {
+                resp.AgregarBadRequest(ex.Message);
+            }
+
+            return resp;
         }
 
         public async Task<RespuestaService<List<Proveedor>>> Listar()

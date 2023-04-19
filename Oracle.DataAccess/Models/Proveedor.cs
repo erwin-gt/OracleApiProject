@@ -15,5 +15,5 @@ public partial class Proveedor
 
     public string Email { get; set; } = null!;
 
-   // public virtual ICollection<OrdenCompra> OrdenCompras { get; } = new List<OrdenCompra>();
+   public virtual ICollection<OrdenCompra> OrdenCompras { get; } = new List<OrdenCompra>();
 }
