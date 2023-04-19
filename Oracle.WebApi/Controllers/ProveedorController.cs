@@ -42,7 +42,7 @@ namespace Oracle.WebApi.Controllers
 
         // Lista la informacion de los usuarios segun la ID ingresado
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProveedorDTO>> BuscarPorId(decimal id)
+        public async Task<ActionResult<ProveedorDTO>> BuscarPorId(int id)
         {
           
 
@@ -90,7 +90,7 @@ namespace Oracle.WebApi.Controllers
 
         // Elimina segun el ID ingresado
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> Eliminar(decimal id)
+        public async Task<ActionResult<bool>> Eliminar(int id)
         {
 
             var retorno = await _servicio.Eliminar(id);

@@ -9,7 +9,7 @@ namespace Oracle.DTO
     public class ProveedorDTO
 
     {
-        public decimal Idprov { get; set; }
+        public int Idprov { get; set; }
 
         public string? NEmpresa { get; set; }
 

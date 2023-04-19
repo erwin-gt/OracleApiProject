@@ -22,9 +22,9 @@ namespace Oracle.Services.Actions
                 resp.AgregarBadRequest("ID recibido no esta registrado");
             else
                 prov.Nombreempresa = pr.Nombreempresa;
-                prov.Telefono = pr.Telefono;
-                prov.Contacto = pr.Contacto;
-                prov.Email = pr.Email;
+            prov.Telefono = pr.Telefono;
+            prov.Contacto = pr.Contacto;
+            prov.Email = pr.Email;
             try
             {
                 _context.Proveedors.Update(prov);
@@ -40,17 +40,17 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<Proveedor>> BuscarPorId(decimal id)
+        public Task<RespuestaService<Proveedor>> BuscarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<RespuestaService<bool>> Eliminar(decimal id)
+        public Task<RespuestaService<bool>> Eliminar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public  Task<RespuestaService<Proveedor>> Guardar(Proveedor pr)
+        public Task<RespuestaService<Proveedor>> Guardar(Proveedor pr)
         {
             throw new NotImplementedException();
         }
@@ -68,5 +68,9 @@ namespace Oracle.Services.Actions
 
             return resp;
         }
+
+       
+
+
     }
 }
