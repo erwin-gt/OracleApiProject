@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ModelContext>(x =>
 //Implementacion de los servicios para cada modelo
 
 builder.Services.AddTransient<IProveedorService, ProveedorService>();
+builder.Services.AddTransient<IRegionService, RegionService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

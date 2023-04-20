@@ -17,7 +17,7 @@ namespace Oracle.WebApi.Mappings
                 
             };
         }
-    }
+    } 
 
     public static partial class MapperProv
     {

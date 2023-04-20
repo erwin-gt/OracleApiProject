@@ -3,28 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 using Oracle.DTO;
 using Oracle.Services.Interfaces;
 using Oracle.WebApi.Mappings;
+using System.Drawing.Drawing2D;
 
 namespace Oracle.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProveedorController : ControllerBase
+    public class RegionController : ControllerBase
     {
-        private readonly IProveedorService _servicio;
+        private readonly IRegionService _servicio;
 
-        public ProveedorController(IProveedorService servicio)
+        public RegionController(IRegionService servicio)
         {
 
             _servicio = servicio;
         }
 
-
-
-        // Lista la informacion de los Proveedores
+        // Lista la informacion de los Regiones
         [HttpGet]
-        public async Task<ActionResult<List<ProveedorDTO>>> Listar()
+        public async Task<ActionResult<List<RegionDTO>>> Listar()
         {
-          
+
             //Utilizado por el servicio creado IUsuarioService
 
             var retorno = await _servicio.Listar();
@@ -32,7 +31,7 @@ namespace Oracle.WebApi.Controllers
             //validacion del servicio
             if (retorno.Objeto != null)
                 // return retorno.Objeto; Sin aplicar el uso del servicio
-                return retorno.Objeto.Select(MapperProv.ToDTO).ToList();
+                return retorno.Objeto.Select(MapperReg.ToDTO).ToList();
             else
                 return StatusCode(retorno.Status, retorno.Error);
 
@@ -40,11 +39,11 @@ namespace Oracle.WebApi.Controllers
         }
 
 
-        // Lista la informacion de los Proveedores segun la ID ingresado
+        // Lista la informacion de los REgiones segun la ID ingresado
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProveedorDTO>> BuscarPorId(int id)
+        public async Task<ActionResult<RegionDTO>> BuscarPorId(decimal id)
         {
-          
+
 
             var retorno = await _servicio.BuscarPorId(id);
 
@@ -59,11 +58,11 @@ namespace Oracle.WebApi.Controllers
 
         // Ingresa de datos
         [HttpPost]
-        public async Task<ActionResult<ProveedorDTO>> Guardar(ProveedorDTO pr)
+        public async Task<ActionResult<RegionDTO>> Guardar(RegionDTO rg)
         {
-           
 
-            var retorno = await _servicio.Guardar(pr.ToDatabase());
+
+            var retorno = await _servicio.Guardar(rg.ToDatabase());
 
             if (retorno.Objeto != null)
                 return retorno.Objeto.ToDTO();
@@ -75,11 +74,11 @@ namespace Oracle.WebApi.Controllers
 
         // Actualiza datos
         [HttpPut]
-        public async Task<ActionResult<ProveedorDTO>> Actualizar(ProveedorDTO pr)
+        public async Task<ActionResult<RegionDTO>> Actualizar(RegionDTO rg)
         {
-         
 
-            var retorno = await _servicio.Actualizar(pr.ToDatabase());
+
+            var retorno = await _servicio.Actualizar(rg.ToDatabase());
 
             if (retorno.Objeto != null)
                 return retorno.Objeto.ToDTO();
