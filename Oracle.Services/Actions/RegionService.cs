@@ -1,36 +1,40 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Oracle.DataAccess.Models;
 using Oracle.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Oracle.Services.Actions
 {
-    public class ProveedorService : IProveedorService
+    public class RegionService : IRegionService
     {
         private ModelContext _context;
 
-        public ProveedorService(ModelContext contect)
+        public RegionService(ModelContext contect)
         {
             _context = contect;
         }
 
-        public async Task<RespuestaService<Proveedor>> Actualizar(Proveedor pr)
+        public async Task<RespuestaService<Region>> Actualizar(Region rg)
         {
-            var resp = new RespuestaService<Proveedor>();
-            var prov = await _context.Proveedors.FirstOrDefaultAsync(x => x.Idproveedor == pr.Idproveedor);
+            var resp = new RespuestaService<Region>();
+            var regs = await _context.Regions.FirstOrDefaultAsync(x => x.Idregion == rg.Idregion);
 
-            if (prov == null)
+            if (regs == null)
                 resp.AgregarBadRequest("ID recibido no esta registrado");
             else
-                prov.Nombreempresa = pr.Nombreempresa;
-                prov.Telefono = pr.Telefono;
-                prov.Contacto = pr.Contacto;
-                prov.Email = pr.Email;
+                regs.Nombre = rg.Nombre;
+                regs.Ciudad = rg.Ciudad;
+                regs.Provincia = rg.Provincia;
             try
             {
-                _context.Proveedors.Update(prov);
+                _context.Regions.Update(regs);
                 await _context.SaveChangesAsync();
 
-                resp.Objeto = prov;
+                resp.Objeto = regs;
             }
             catch (DbUpdateException ex)
             {
@@ -40,31 +44,31 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<Proveedor>> BuscarPorId(int id)
+        public async Task<RespuestaService<Region>> BuscarPorId(decimal id)
         {
-            var resp = new RespuestaService<Proveedor>();
-            var prov = await _context.Proveedors.FirstOrDefaultAsync(x => x.Idproveedor == id);
+            var resp = new RespuestaService<Region>();
+            var regs = await _context.Regions.FirstOrDefaultAsync(x => x.Idregion == id);
 
-            // valida la existencia del ID del usuario
-            if (prov == null)
+            // valida la existencia del ID de la region
+            if (regs == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else
-                resp.Objeto = prov;
+                resp.Objeto = regs;
             return resp;
         }
 
         public async Task<RespuestaService<bool>> Eliminar(int id)
         {
             var resp = new RespuestaService<bool>();
-            var prov = await _context.Proveedors.FirstOrDefaultAsync(x => x.Idproveedor == id);
+            var regs = await _context.Regions.FirstOrDefaultAsync(x => x.Idregion == id);
 
-            if (prov == null)
+            if (regs == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else
             {
                 try
                 {
-                    _context.Proveedors.Remove(prov);
+                    _context.Regions.Remove(regs);
                     await _context.SaveChangesAsync();
                     resp.Exito = true;
                 }
@@ -77,17 +81,17 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<Proveedor>> Guardar(Proveedor pr)
+        public async Task<RespuestaService<Region>> Guardar(Region rg)
         {
-            var resp = new RespuestaService<Proveedor>();
+            var resp = new RespuestaService<Region>();
 
             try
             {
-                await _context.Proveedors.AddAsync(pr);
+                await _context.Regions.AddAsync(rg);
                 await _context.SaveChangesAsync();
-                pr.Idproveedor = await _context.Proveedors.MaxAsync(prv => prv.Idproveedor);
+                rg.Idregion = await _context.Regions.MaxAsync(reg => reg.Idregion);
 
-                resp.Objeto = pr;
+                resp.Objeto = rg;
             }
             catch (DbUpdateException ex)
             {
@@ -97,11 +101,11 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<List<Proveedor>>> Listar()
+        public async Task<RespuestaService<List<Region>>> Listar()
         {
             //implementa y despliega el resultado de la lista 
-            var resp = new RespuestaService<List<Proveedor>>();
-            var lista = await _context.Proveedors.ToListAsync();
+            var resp = new RespuestaService<List<Region>>();
+            var lista = await _context.Regions.ToListAsync();
 
             if (lista != null)
                 resp.Objeto = lista;
@@ -110,9 +114,6 @@ namespace Oracle.Services.Actions
 
             return resp;
         }
-
-       
-
-
     }
-}
+ }
+

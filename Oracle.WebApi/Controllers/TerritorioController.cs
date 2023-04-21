@@ -8,23 +8,21 @@ namespace Oracle.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProveedorController : ControllerBase
+    public class TerritorioController : ControllerBase
     {
-        private readonly IProveedorService _servicio;
+        private readonly ITerritorioService _servicio;
 
-        public ProveedorController(IProveedorService servicio)
+        public TerritorioController(ITerritorioService servicio)
         {
 
             _servicio = servicio;
         }
 
-
-
-        // Lista la informacion de los Proveedores
+        // Lista la informacion de los Territorios
         [HttpGet]
-        public async Task<ActionResult<List<ProveedorDTO>>> Listar()
+        public async Task<ActionResult<List<TerritorioDTO>>> Listar()
         {
-          
+
             //Utilizado por el servicio creado IUsuarioService
 
             var retorno = await _servicio.Listar();
@@ -32,7 +30,7 @@ namespace Oracle.WebApi.Controllers
             //validacion del servicio
             if (retorno.Objeto != null)
                 // return retorno.Objeto; Sin aplicar el uso del servicio
-                return retorno.Objeto.Select(MapperProv.ToDTO).ToList();
+                return retorno.Objeto.Select(MapperTer.ToDTO).ToList();
             else
                 return StatusCode(retorno.Status, retorno.Error);
 
@@ -40,11 +38,11 @@ namespace Oracle.WebApi.Controllers
         }
 
 
-        // Lista la informacion de los Proveedores segun la ID ingresado
+        // Lista la informacion de los Territorios segun la ID ingresado
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProveedorDTO>> BuscarPorId(int id)
+        public async Task<ActionResult<TerritorioDTO>> BuscarPorId(int id)
         {
-          
+
 
             var retorno = await _servicio.BuscarPorId(id);
 
@@ -59,11 +57,11 @@ namespace Oracle.WebApi.Controllers
 
         // Ingresa de datos
         [HttpPost]
-        public async Task<ActionResult<ProveedorDTO>> Guardar(ProveedorDTO pr)
+        public async Task<ActionResult<TerritorioDTO>> Guardar(TerritorioDTO tr)
         {
-           
 
-            var retorno = await _servicio.Guardar(pr.ToDatabase());
+
+            var retorno = await _servicio.Guardar(tr.ToDatabase());
 
             if (retorno.Objeto != null)
                 return retorno.Objeto.ToDTO();
@@ -75,11 +73,11 @@ namespace Oracle.WebApi.Controllers
 
         // Actualiza datos
         [HttpPut]
-        public async Task<ActionResult<ProveedorDTO>> Actualizar(ProveedorDTO pr)
+        public async Task<ActionResult<TerritorioDTO>> Actualizar(TerritorioDTO tr)
         {
-         
 
-            var retorno = await _servicio.Actualizar(pr.ToDatabase());
+
+            var retorno = await _servicio.Actualizar(tr.ToDatabase());
 
             if (retorno.Objeto != null)
                 return retorno.Objeto.ToDTO();
