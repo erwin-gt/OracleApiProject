@@ -23,6 +23,7 @@ builder.Services.AddTransient<IProveedorService, ProveedorService>();
 builder.Services.AddTransient<IRegionService, RegionService>();
 builder.Services.AddTransient<ICategoriaService,CategoriaService>();
 builder.Services.AddTransient<ITerritorioService, TerritorioService>();
+builder.Services.AddTransient<ISucursalService, SucursalService>();
 
 
 builder.Services.AddControllers();
