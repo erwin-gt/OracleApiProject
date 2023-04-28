@@ -24,7 +24,7 @@ builder.Services.AddTransient<IRegionService, RegionService>();
 builder.Services.AddTransient<ICategoriaService,CategoriaService>();
 builder.Services.AddTransient<ITerritorioService, TerritorioService>();
 builder.Services.AddTransient<ISucursalService, SucursalService>();
-
+builder.Services.AddTransient<ITipoUserService,TipoUserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
