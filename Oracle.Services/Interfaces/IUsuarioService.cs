@@ -11,6 +11,7 @@ namespace Oracle.Services.Interfaces
     {
         Task<RespuestaService<List<Usuario>>> Listar();
         Task<RespuestaService<Usuario>> BuscarPorId(int id);
+        Task<RespuestaService<Usuario>> ValidarUsuario(string email, string contra);
         Task<RespuestaService<Usuario>> Guardar(Usuario us);
         Task<RespuestaService<Usuario>> Actualizar(Usuario us);
         Task<RespuestaService<bool>> Eliminar(int id);
