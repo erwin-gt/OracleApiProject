@@ -54,6 +54,22 @@ namespace Oracle.WebApi.Controllers
 
         }
 
+        // Lista la informacion de los Usaurios segun la ID ingresado
+        [HttpGet("{email}/{contra}")]
+        public async Task<ActionResult<UsuarioDTO>> ValidarUsuario(string email, string contra)
+        {
+
+
+            var retorno = await _servicio.ValidarUsuario(email,contra);
+
+            //validacion del servicio
+            if (retorno.Objeto != null)
+                return retorno.Objeto.ToDTO();
+            else
+                return StatusCode(retorno.Status, retorno.Error);
+
+        }
+
 
         // Ingresa de datos
         [HttpPost]

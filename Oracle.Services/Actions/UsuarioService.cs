@@ -4,6 +4,7 @@ using Oracle.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -116,6 +117,21 @@ namespace Oracle.Services.Actions
             else
                 resp.AgregarInternalServerError("Se encontro un Error");
 
+            return resp;
+        }
+
+
+        //PARA VALIDAR LA EXISTENCIA DEL USUARIO
+        public async Task<RespuestaService<Usuario>> ValidarUsuario(string email, string contra)
+        {
+            var resp = new RespuestaService<Usuario>();
+            var usr = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == email & x.Contraseña == contra);
+
+            // valida la existencia del ID del sucursal
+            if (usr == null)
+                resp.AgregarBadRequest("Datos ingresados no validos");
+            else
+                resp.Objeto = usr;
             return resp;
         }
     }
