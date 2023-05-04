@@ -51,7 +51,20 @@ namespace Oracle.Services.Actions
             var resp = new RespuestaService<Territorio>();
             var terr = await _context.Territorios.FirstOrDefaultAsync(x => x.Idterritorio == id);
 
-            // valida la existencia del ID del usuario
+            // valida la existencia del ID del Territorio
+            if (terr == null)
+                resp.AgregarBadRequest("ID ingresado no esta registrado");
+            else
+                resp.Objeto = terr;
+            return resp;
+        }
+
+        public async Task<RespuestaService<Territorio>> BuscarporRegion(int id)
+        {
+            var resp = new RespuestaService<Territorio>();
+            var terr = await _context.Territorios.FirstOrDefaultAsync(x => x.Idregion == id);
+
+            // valida la existencia del ID del Territorio
             if (terr == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else

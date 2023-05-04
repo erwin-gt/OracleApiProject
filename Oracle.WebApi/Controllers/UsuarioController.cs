@@ -54,6 +54,23 @@ namespace Oracle.WebApi.Controllers
 
         }
 
+        // Lista la informacion de los Usuario segun la tipo ingresado
+        [HttpGet("{id}/Tipos")]
+        public async Task<ActionResult<UsuarioDTO>> BuscarporTipoUsuario(int id)
+        {
+
+
+            var retorno = await _servicio.BuscarporTipoUsuario(id);
+
+            //validacion del servicio
+            if (retorno.Objeto != null)
+                return retorno.Objeto.ToDTO();
+            else
+                return StatusCode(retorno.Status, retorno.Error);
+
+        }
+
+
         // Lista la informacion de los Usaurios segun la ID ingresado
         [HttpGet("{email}/{contra}")]
         public async Task<ActionResult<UsuarioDTO>> ValidarUsuario(string email, string contra)

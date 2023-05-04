@@ -63,6 +63,19 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
+        public async Task<RespuestaService<Usuario>> BuscarporTipoUsuario(int id)
+        {
+            var resp = new RespuestaService<Usuario>();
+            var usr = await _context.Usuarios.FirstOrDefaultAsync(x => x.Idtipousuario == id);
+
+            // valida la existencia del ID del sucursal
+            if (usr == null)
+                resp.AgregarBadRequest("No existen usuarios registrados con este tipo");
+            else
+                resp.Objeto = usr;
+            return resp;
+        }
+
         public async Task<RespuestaService<bool>> Eliminar(int id)
         {
             var resp = new RespuestaService<bool>();
