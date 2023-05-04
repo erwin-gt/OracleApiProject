@@ -13,6 +13,7 @@ namespace Oracle.Services.Interfaces
         Task<RespuestaService<Sucursal>> BuscarPorId(int id);
         Task<RespuestaService<Sucursal>> Guardar(Sucursal su);
         Task<RespuestaService<Sucursal>> Actualizar(Sucursal su);
+        //Task<RespuestaService<Sucursal>> porTerritorio(int id);
         Task<RespuestaService<bool>> Eliminar(int id);
     }
 }

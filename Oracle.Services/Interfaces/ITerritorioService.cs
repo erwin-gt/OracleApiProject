@@ -11,6 +11,7 @@ namespace Oracle.Services.Interfaces
     {
         Task<RespuestaService<List<Territorio>>> Listar();
         Task<RespuestaService<Territorio>> BuscarPorId(int id);
+        Task<RespuestaService<Territorio>> BuscarporRegion(int id);
         Task<RespuestaService<Territorio>> Guardar(Territorio tr);
         Task<RespuestaService<Territorio>> Actualizar(Territorio tr);
         Task<RespuestaService<bool>> Eliminar(int id);

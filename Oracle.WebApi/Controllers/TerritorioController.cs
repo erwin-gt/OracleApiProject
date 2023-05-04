@@ -54,6 +54,21 @@ namespace Oracle.WebApi.Controllers
 
         }
 
+        [HttpGet("{region}/Regiones")]
+        public async Task<ActionResult<TerritorioDTO>> buscarBuscarporRegion(int region)
+        {
+
+
+            var retorno = await _servicio.BuscarporRegion(region);
+
+            //validacion del servicio
+            if (retorno.Objeto != null)
+                return retorno.Objeto.ToDTO();
+            else
+                return StatusCode(retorno.Status, retorno.Error);
+
+        }
+
 
         // Ingresa de datos
         [HttpPost]

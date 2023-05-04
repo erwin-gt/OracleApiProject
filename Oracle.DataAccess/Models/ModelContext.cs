@@ -229,7 +229,11 @@ public partial class ModelContext : DbContext
 
         modelBuilder.Entity<DetalleFactura>(entity =>
         {
+            /// Original
             entity.HasKey(e => e.Iddetallefactura).HasName("SYS_C007750");
+            
+            //Nuevo
+            //entity.HasKey(e => new { e.Idfactura, e.Iddescuento});
 
             entity.ToTable("DETALLE_FACTURA");
 
