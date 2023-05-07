@@ -13,13 +13,9 @@ public partial class Pedido
 
     public string? Estadoenvio { get; set; }
 
-    public int? Idproducto { get; set; }
-
     public int? Idfactura { get; set; }
 
     public virtual ICollection<DetallePedido> DetallePedidos { get; } = new List<DetallePedido>();
 
     public virtual Factura? IdfacturaNavigation { get; set; }
-
-    public virtual Producto? IdproductoNavigation { get; set; }
 }

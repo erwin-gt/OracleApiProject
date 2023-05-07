@@ -17,6 +17,8 @@ public partial class OrdenCompra
 
     public int Idproducto { get; set; }
 
+    public decimal Preciounitario { get; set; }
+
     public virtual Proveedor IdproveedorNavigation { get; set; } = null!;
 
     public virtual ICollection<Producto> Productos { get; } = new List<Producto>();

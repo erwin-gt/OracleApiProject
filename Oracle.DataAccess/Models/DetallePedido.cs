@@ -17,5 +17,9 @@ public partial class DetallePedido
 
     public int? Idpedido { get; set; }
 
+    public int? Idproducto { get; set; }
+
     public virtual Pedido? IdpedidoNavigation { get; set; }
+
+    public virtual Producto? IdproductoNavigation { get; set; }
 }

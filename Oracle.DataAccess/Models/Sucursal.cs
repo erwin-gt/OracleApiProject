@@ -19,7 +19,5 @@ public partial class Sucursal
 
     public virtual ICollection<Empleado> Empleados { get; } = new List<Empleado>();
 
-    public virtual ICollection<Factura> Facturas { get; } = new List<Factura>();
-
     public virtual Territorio? IdterritorioNavigation { get; set; }
 }
