@@ -53,10 +53,10 @@ public partial class ModelContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        //     => optionsBuilder.UseOracle("User Id=PROYECTO;Password=1234;Data Source=localhost:1521/DB2;");
-    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseOracle("User Id=PROYECTO; Password=1234;Data Source=localhost:1521/DB2;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
@@ -229,11 +229,7 @@ public partial class ModelContext : DbContext
 
         modelBuilder.Entity<DetalleFactura>(entity =>
         {
-            /// Original
             entity.HasKey(e => e.Iddetallefactura).HasName("SYS_C007750");
-            
-            //Nuevo
-            //entity.HasKey(e => new { e.Idfactura, e.Iddescuento});
 
             entity.ToTable("DETALLE_FACTURA");
 
@@ -283,6 +279,9 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Idpedido)
                 .HasPrecision(10)
                 .HasColumnName("IDPEDIDO");
+            entity.Property(e => e.Idproducto)
+                .HasPrecision(10)
+                .HasColumnName("IDPRODUCTO");
             entity.Property(e => e.Preciounitario)
                 .HasColumnType("NUMBER(10,2)")
                 .HasColumnName("PRECIOUNITARIO");
@@ -293,6 +292,10 @@ public partial class ModelContext : DbContext
             entity.HasOne(d => d.IdpedidoNavigation).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.Idpedido)
                 .HasConstraintName("FK_PEDIDO_DETALLE_PEDIDO");
+
+            entity.HasOne(d => d.IdproductoNavigation).WithMany(p => p.DetallePedidos)
+                .HasForeignKey(d => d.Idproducto)
+                .HasConstraintName("FK_PRODUCTO_PEDIDO");
         });
 
         modelBuilder.Entity<Empleado>(entity =>
@@ -403,9 +406,6 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Idformapago)
                 .HasPrecision(10)
                 .HasColumnName("IDFORMAPAGO");
-            entity.Property(e => e.Idsucursal)
-                .HasPrecision(10)
-                .HasColumnName("IDSUCURSAL");
             entity.Property(e => e.Notas)
                 .HasMaxLength(500)
                 .IsUnicode(false)
@@ -425,10 +425,6 @@ public partial class ModelContext : DbContext
             entity.HasOne(d => d.IdformapagoNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.Idformapago)
                 .HasConstraintName("FK_FORMAPAGO_FACTURA");
-
-            entity.HasOne(d => d.IdsucursalNavigation).WithMany(p => p.Facturas)
-                .HasForeignKey(d => d.Idsucursal)
-                .HasConstraintName("FK_SUCURSAL_FACTURA");
         });
 
         modelBuilder.Entity<FormaPago>(entity =>
@@ -467,6 +463,10 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Idproveedor)
                 .HasPrecision(10)
                 .HasColumnName("IDPROVEEDOR");
+            entity.Property(e => e.Preciounitario)
+                .HasDefaultValueSql("0 ")
+                .HasColumnType("NUMBER(10,2)")
+                .HasColumnName("PRECIOUNITARIO");
             entity.Property(e => e.Ubicacion)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -500,17 +500,10 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Idfactura)
                 .HasPrecision(10)
                 .HasColumnName("IDFACTURA");
-            entity.Property(e => e.Idproducto)
-                .HasPrecision(10)
-                .HasColumnName("IDPRODUCTO");
 
             entity.HasOne(d => d.IdfacturaNavigation).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.Idfactura)
                 .HasConstraintName("FK_FACTURA_PEDIDO");
-
-            entity.HasOne(d => d.IdproductoNavigation).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.Idproducto)
-                .HasConstraintName("FK_PRODUCTO_PEDIDO");
         });
 
         modelBuilder.Entity<Producto>(entity =>

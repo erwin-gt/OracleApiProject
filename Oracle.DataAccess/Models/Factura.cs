@@ -17,8 +17,6 @@ public partial class Factura
 
     public int? Idempleado { get; set; }
 
-    public int? Idsucursal { get; set; }
-
     public int? Idcliente { get; set; }
 
     public int? Idformapago { get; set; }
@@ -30,8 +28,6 @@ public partial class Factura
     public virtual Empleado? IdempleadoNavigation { get; set; }
 
     public virtual FormaPago? IdformapagoNavigation { get; set; }
-
-    public virtual Sucursal? IdsucursalNavigation { get; set; }
 
     public virtual ICollection<Pedido> Pedidos { get; } = new List<Pedido>();
 }

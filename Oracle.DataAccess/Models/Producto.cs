@@ -25,11 +25,11 @@ public partial class Producto
 
     public int? Idcategoriaproducto { get; set; }
 
+    public virtual ICollection<DetallePedido> DetallePedidos { get; } = new List<DetallePedido>();
+
     public virtual CategoriaProducto? IdcategoriaproductoNavigation { get; set; }
 
     public virtual Cardex? IdinventarioNavigation { get; set; }
 
     public virtual OrdenCompra? IdordencompraNavigation { get; set; }
-
-    public virtual ICollection<Pedido> Pedidos { get; } = new List<Pedido>();
 }
