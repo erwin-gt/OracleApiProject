@@ -28,6 +28,7 @@ builder.Services.AddTransient<ITipoUserService,TipoUserService>();
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<ICardexService, CardexService>();
 builder.Services.AddTransient<IProductoService, ProductoService>();
+builder.Services.AddTransient<IOrdenCompraService, OrdenCompraService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

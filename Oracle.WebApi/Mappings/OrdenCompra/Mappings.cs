@@ -13,8 +13,9 @@ namespace Oracle.WebApi.Mappings
                 Fechacompra = model.Fechacompra,
                 Cantidad = model.Cantidad,
                 Ubicacion = model.Ubicacion,
-                Idproducto = model.Idproducto,7j-nnnnnnnnnnnnnnlñhñk k gggggggggggggghmmmmmjkdmdddddddddddddkkkkkkkkkkkkkkkkkkkkkkkkkkkjrhff3yyyyyyr777777777
+                Idproducto = model.Idproducto,
                 Idproveedor = model.Idproveedor,
+                Preciounitario = model.Preciounitario,
 
             };
         }
@@ -31,7 +32,8 @@ namespace Oracle.WebApi.Mappings
                 Cantidad = dto.Cantidad,
                 Ubicacion = dto.Ubicacion,
                 Idproducto = dto.Idproducto,
-                Idproveedor = dto.Idproveedor,
+                Idproveedor  = dto.Idproveedor,
+                Preciounitario= dto.Preciounitario,
 
             };
         }

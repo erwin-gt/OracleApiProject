@@ -11,7 +11,7 @@ namespace Oracle.Services.Interfaces
     {
         Task<RespuestaService<List<Cardex>>> Listar();
         Task<RespuestaService<Cardex>> BuscarPorId(int id);
-        //Task<RespuestaService<Cardex>> Guardar(Cardex ct);
+        Task<RespuestaService<Cardex>> Guardar(Cardex ct);
         Task<RespuestaService<Cardex>> Actualizar(Cardex ct);
         //Task<RespuestaService<bool>> Eliminar(int id);
     }

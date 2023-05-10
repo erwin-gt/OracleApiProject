@@ -27,7 +27,7 @@ namespace Oracle.Services.Actions
                 resp.AgregarBadRequest("ID recibido no esta registrado");
             else
                 cate.Descripcion = ct.Descripcion;
-                cate.Fechaultimaactualizacion = ct.Fechaultimaactualizacion;
+                //cate.Fechaultimaactualizacion = ct.Fechaultimaactualizacion;
                 cate.Observaciones = ct.Observaciones;
             try
             {
@@ -54,6 +54,26 @@ namespace Oracle.Services.Actions
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else
                 resp.Objeto = cate;
+            return resp;
+        }
+
+        public async Task<RespuestaService<Cardex>> Guardar(Cardex ct)
+        {
+            var resp = new RespuestaService<Cardex>();
+
+            try
+            {
+                await _context.Cardices.AddAsync(ct);
+                await _context.SaveChangesAsync();
+                ct.Idinventario = await _context.Cardices.MaxAsync(cate => cate.Idinventario);
+
+                resp.Objeto = ct;
+            }
+            catch (DbUpdateException ex)
+            {
+                resp.AgregarBadRequest(ex.Message);
+            }
+
             return resp;
         }
 
