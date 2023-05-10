@@ -55,7 +55,7 @@ public partial class ModelContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseOracle("User Id=PROYECTO; Password=1234;Data Source=localhost:1521/DB2;");
+        => optionsBuilder.UseOracle("User Id=PROYECTO; Password=1234; Data Source=localhost:1521/DB2;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -453,17 +453,20 @@ public partial class ModelContext : DbContext
                 .HasColumnName("IDORDENCOMPRA");
             entity.Property(e => e.Cantidad)
                 .HasPrecision(10)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("CANTIDAD");
             entity.Property(e => e.Fechacompra)
                 .HasColumnType("DATE")
                 .HasColumnName("FECHACOMPRA");
             entity.Property(e => e.Idproducto)
                 .HasPrecision(10)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("IDPRODUCTO");
             entity.Property(e => e.Idproveedor)
                 .HasPrecision(10)
                 .HasColumnName("IDPROVEEDOR");
             entity.Property(e => e.Preciounitario)
+                .ValueGeneratedOnAdd()
                 .HasDefaultValueSql("0 ")
                 .HasColumnType("NUMBER(10,2)")
                 .HasColumnName("PRECIOUNITARIO");

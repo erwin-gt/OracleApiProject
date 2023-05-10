@@ -4,34 +4,37 @@ using Oracle.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Oracle.Services.Actions
 {
-    public class CategoriaService : ICategoriaService
+    public class OrdenCompraService : IOrdenCompraService
     {
         private ModelContext _context;
 
-        public CategoriaService(ModelContext contect)
+        public OrdenCompraService(ModelContext context)
         {
-            _context = contect;
+            _context = context;
         }
 
-        public async Task<RespuestaService<CategoriaProducto>> Actualizar(CategoriaProducto ct)
+        public async Task<RespuestaService<OrdenCompra>> Actualizar(OrdenCompra ct)
         {
-            var resp = new RespuestaService<CategoriaProducto>();
-            var cate = await _context.CategoriaProductos.FirstOrDefaultAsync(x => x.Idcategoriaproducto == ct.Idcategoriaproducto);
+            var resp = new RespuestaService<OrdenCompra>();
+            var cate = await _context.OrdenCompras.FirstOrDefaultAsync(x => x.Idordencompra == ct.Idordencompra);
 
             if (cate == null)
                 resp.AgregarBadRequest("ID recibido no esta registrado");
             else
-                cate.Nombre = ct.Nombre;
-                cate.Tipomueble = ct.Tipomueble;
-                cate.Descripcion = ct.Descripcion;
+                cate.Fechacompra = ct.Fechacompra;
+                cate.Cantidad = ct.Cantidad;
+                cate.Ubicacion = ct.Ubicacion;
+                cate.Idproducto = ct.Idproducto;
+                cate.Idproveedor = ct.Idproveedor;
             try
             {
-                _context.CategoriaProductos.Update(cate);
+                _context.OrdenCompras.Update(cate);
                 await _context.SaveChangesAsync();
 
                 resp.Objeto = cate;
@@ -44,12 +47,12 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<CategoriaProducto>> BuscarPorId(int id)
+        public async Task<RespuestaService<OrdenCompra>> BuscarPorId(int id)
         {
-            var resp = new RespuestaService<CategoriaProducto>();
-            var cate = await _context.CategoriaProductos.FirstOrDefaultAsync(x => x.Idcategoriaproducto == id);
+            var resp = new RespuestaService<OrdenCompra>();
+            var cate = await _context.OrdenCompras.FirstOrDefaultAsync(x => x.Idordencompra == id);
 
-            // valida la existencia del ID del usuario
+            // valida la existencia del ID del de la orden de compra
             if (cate == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else
@@ -60,7 +63,7 @@ namespace Oracle.Services.Actions
         public async Task<RespuestaService<bool>> Eliminar(int id)
         {
             var resp = new RespuestaService<bool>();
-            var cate = await _context.CategoriaProductos.FirstOrDefaultAsync(x => x.Idcategoriaproducto == id);
+            var cate = await _context.OrdenCompras.FirstOrDefaultAsync(x => x.Idordencompra == id);
 
             if (cate == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
@@ -68,7 +71,7 @@ namespace Oracle.Services.Actions
             {
                 try
                 {
-                    _context.CategoriaProductos.Remove(cate);
+                    _context.OrdenCompras.Remove(cate);
                     await _context.SaveChangesAsync();
                     resp.Exito = true;
                 }
@@ -81,15 +84,15 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<CategoriaProducto>> Guardar(CategoriaProducto ct)
+        public async Task<RespuestaService<OrdenCompra>> Guardar(OrdenCompra ct)
         {
-            var resp = new RespuestaService<CategoriaProducto>();
+            var resp = new RespuestaService<OrdenCompra>();
 
             try
             {
-                await _context.CategoriaProductos.AddAsync(ct);
+                await _context.OrdenCompras.AddAsync(ct);
                 await _context.SaveChangesAsync();
-                ct.Idcategoriaproducto = await _context.CategoriaProductos.MaxAsync(cate => cate.Idcategoriaproducto);
+                ct.Idordencompra = await _context.OrdenCompras.MaxAsync(cate => cate.Idordencompra);
 
                 resp.Objeto = ct;
             }
@@ -101,13 +104,12 @@ namespace Oracle.Services.Actions
             return resp;
         }
 
-        public async Task<RespuestaService<List<CategoriaProducto>>> Listar()
+        public async Task<RespuestaService<List<OrdenCompra>>> Listar()
         {
             //implementa y despliega el resultado de la lista 
-            var resp = new RespuestaService<List<CategoriaProducto>>();
-            var lista = await _context.CategoriaProductos.ToListAsync();
+            var resp = new RespuestaService<List<OrdenCompra>>();
+            var lista = await _context.OrdenCompras.ToListAsync();
 
-             
             if (lista != null)
                 resp.Objeto = lista;
             else
@@ -115,5 +117,6 @@ namespace Oracle.Services.Actions
 
             return resp;
         }
+
     }
 }
