@@ -32,6 +32,10 @@ builder.Services.AddTransient<IOrdenCompraService, OrdenCompraService>();
 builder.Services.AddTransient<IDescuentoService, DescuentoService>();
 builder.Services.AddTransient<IFormaPagoService, FormaPagoService>(); 
 builder.Services.AddTransient<IPuestoService, PuestoService>();
+builder.Services.AddTransient<IClienteService, ClienteService>();
+builder.Services.AddTransient<IFacturaService, FacturaService>();
+builder.Services.AddTransient<IPedidoService,PedidoService>();
+builder.Services.AddTransient<IDetallePedidoService, DetallePedidoService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
