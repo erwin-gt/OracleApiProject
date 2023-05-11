@@ -49,7 +49,7 @@ namespace Oracle.Services.Actions
             var resp = new RespuestaService<Cardex>();
             var cate = await _context.Cardices.FirstOrDefaultAsync(x => x.Idinventario == id);
 
-            // valida la existencia del ID del usuario
+            // valida la existencia del ID del cardex
             if (cate == null)
                 resp.AgregarBadRequest("ID ingresado no esta registrado");
             else
